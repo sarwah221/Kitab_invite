@@ -443,7 +443,7 @@
     }
 
     .letter-names {
-      font-family: 'Amiri', serif;
+      font-family: 'Great Vibes', cursive;
       font-size: 50px;
       color: #8f966d;
       line-height: 1.1;
@@ -452,7 +452,7 @@
     }
 
     .letter-ampersand {
-      font-family: 'Amiri', serif;
+      font-family: 'Playfair Display', serif;
       font-style: italic;
       font-size: 26px;
       color: rgba(180,140,60,0.7);
@@ -487,7 +487,7 @@
 
     .letter-footer {
       margin-top: 12px;
-      font-family: 'Amiri', serif;
+      font-family: 'Great Vibes', cursive;
       font-style: italic;
       font-size: 12px;
       color: rgba(140,100,60,0.7);
@@ -594,7 +594,11 @@
 </head>
 <body>
 
-<div class="monogram" aria-hidden="true"><span>S</span><span class="letter-ampersand-top" aria-hidden="true"></span><span>Z</span></div>
+<div class="monogram" aria-hidden="true">
+  <span>S</span>
+  <span class="letter-ampersand-top" aria-hidden="true"></span>
+  <span>Z</span>
+</div>
 
 <div class="particles" id="particles"></div>
 
@@ -616,34 +620,47 @@
       <img class="wax-img" src="wax2.png" alt="Wax seal">
     </div>
 
-  <div class="letter" dir="rtl" lang="ar">
-  <div class="letter-inner">
-    <div class="letter-eyebrow">يتشرف بشار وتار بدعوتكم لحضور عقد قران ابنته سارة على السيد زيد</div>
-    <div class="letter-divider"></div>
-    <div class="letter-names">
-      سارة
-      <span class="letter-ampersand">و</span>
-      زيد
-    </div>
-    <div class="letter-divider"></div>
-    <p class="letter-body">
-      يدعوانكم بكل سرور لمشاركتهما<br>
-      بداية حياتهما معًا
-    </p>
-    <div class="letter-detail">
-      <strong>التاريخ</strong><br>
-      يوم الثلاثاء ايار 5 2026 <br><br>
-      <strong>المكان</strong><br>
-      Goda Rum, Kumlas Naturenshus, السويد
-    </div>
-    <div class="letter-divider" style="margin-top:12px;"></div>
-    <div class="letter-footer">عشاء</div>
-  </div>
-</div>
+    <!-- UPDATED LETTER -->
+    <div class="letter">
+      <div class="letter-inner">
+        <div class="letter-eyebrow">
+          Bashar Wattar warmly invites you to the Katb Kitab ceremony
+        </div>
 
-    <div class="fold-overlay fold-overlay-left" aria-hidden="true"></div>
-    <div class="fold-overlay fold-overlay-right" aria-hidden="true"></div>
-    <div class="fold-overlay fold-overlay-bottom" aria-hidden="true"></div>
+        <div class="letter-divider"></div>
+
+        <div class="letter-names">
+          Sarah
+          <span class="letter-ampersand">&</span>
+          Zeid
+        </div>
+
+        <div class="letter-divider"></div>
+
+        <p class="letter-body">
+          joyfully invite you to celebrate<br>
+          the beginning of their new life together
+        </p>
+
+        <div class="letter-detail">
+          <strong>Date</strong><br>
+          Tuesday, May 5, 2026<br><br>
+
+          <strong>Venue</strong><br>
+          Goda Rum, Kumlas Naturenshus, Sweden
+        </div>
+
+        <div class="letter-divider" style="margin-top:12px;"></div>
+
+        <div class="letter-footer">
+          Dinner · Love · Celebration
+        </div>
+      </div>
+    </div>
+
+    <div class="fold-overlay fold-overlay-left"></div>
+    <div class="fold-overlay fold-overlay-right"></div>
+    <div class="fold-overlay fold-overlay-bottom"></div>
   </div>
 
   <div class="hint">— tap to open —</div>
@@ -698,5 +715,6 @@
     }, OPEN_SETTLE_MS);
   }
 </script>
+
 </body>
 </html>
