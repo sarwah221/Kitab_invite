@@ -668,70 +668,138 @@
       }
 
       .scene {
-        width: min(88vw, 320px);
-        transform: translateY(115px);
+        width: min(82vw, 290px);
+        transform: translateY(98px) scale(0.88);
       }
 
       @keyframes envelope-float {
         0%,
         100% {
-          transform: translateY(115px);
+          transform: translateY(98px) scale(0.88);
         }
         50% {
-          transform: translateY(106px);
+          transform: translateY(90px) scale(0.88);
         }
       }
 
       .envelope-wrap {
-        width: min(92vw, 320px);
-        height: calc(min(92vw, 320px) * 0.575);
+        width: min(86vw, 290px);
+        height: calc(min(86vw, 290px) * 0.575);
         right: 0;
-        bottom: -24px;
+        bottom: -30px;
       }
 
       .wax {
-        width: 110px;
-        height: 110px;
-        top: 73%;
+        width: 92px;
+        height: 92px;
+        top: 74%;
       }
 
       .lace-card {
-        width: 88%;
-        height: 500px;
-        bottom: -24px;
+        width: 90%;
+        height: 420px;
+        bottom: -32px;
+      }
+
+      .fold-overlay-bottom {
+        height: 50%;
+        transform: translateY(82px);
       }
 
       .heart-lace-img {
-        width: 96%;
-        height: 92%;
-        transform: translateY(-10px);
+        width: 98%;
+        height: 94%;
+        transform: translateY(-8px);
       }
 
       .letter-detail {
-        margin: 24px auto;
-        font-size: 11px;
-        line-height: 1.8;
-      }
-
-      .letter-body {
-        font-size: 14px;
+        margin: 18px auto;
+        font-size: 10px;
         line-height: 1.6;
       }
 
+      .letter-body {
+        font-size: 13px;
+        line-height: 1.45;
+      }
+
       .letter-names {
-        width: min(100%, 280px);
+        width: min(100%, 240px);
       }
 
       .letter-names-image {
-        width: 90%;
+        width: 86%;
       }
 
       .hint {
-        bottom: 180px;
-        font-size: 13px;
+        bottom: 155px;
+        font-size: 12px;
         letter-spacing: 2px;
       }
     }
+
+    @media (max-width: 480px) {
+      .scene {
+        width: min(90vw, 260px);
+        transform: translateY(86px) scale(0.8);
+      }
+
+      @keyframes envelope-float {
+        0%,
+        100% {
+          transform: translateY(86px) scale(0.8);
+        }
+        50% {
+          transform: translateY(80px) scale(0.8);
+        }
+      }
+
+      .envelope-wrap {
+        width: min(92vw, 260px);
+        height: calc(min(92vw, 260px) * 0.575);
+        bottom: -34px;
+      }
+
+      .wax {
+        width: 80px;
+        height: 80px;
+        top: 75%;
+      }
+
+      .lace-card {
+        height: 380px;
+        bottom: -38px;
+      }
+
+      .fold-overlay-bottom {
+        height: 46%;
+        transform: translateY(72px);
+      }
+
+      .letter-verse {
+        font-size: 12px;
+        line-height: 1.45;
+      }
+
+      .letter-body {
+        font-size: 12px;
+      }
+
+      .letter-detail {
+        margin: 14px auto;
+        font-size: 9px;
+      }
+
+      .letter-footer {
+        font-size: 10px;
+      }
+
+      .hint {
+        bottom: 138px;
+        font-size: 11px;
+      }
+    }
+  
   </style>
 </head>
 <body>
