@@ -7,15 +7,10 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html {
-      overflow-x: hidden;
-    }
-
     body {
       width: 100vw;
       max-width: 100%;
       min-height: 100vh;
-      min-height: 100dvh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -36,9 +31,9 @@
 
     .monogram {
       position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, calc(-50% - 105px));
+      top: 47%;
+      left: 48%;
+      transform: translate(-50%, -250px);
       z-index: 2;
       pointer-events: none;
       font-family: 'Great Vibes', cursive;
@@ -92,7 +87,7 @@
       z-index: 10;
       cursor: pointer;
       perspective: 1200px;
-      transform: translateY(clamp(80px, 18vh, 145px));
+      transform: translateY(145px);
       animation: envelope-float 3.2s ease-in-out infinite;
       will-change: transform;
     }
@@ -105,10 +100,10 @@
     @keyframes envelope-float {
       0%,
       100% {
-        transform: translateY(clamp(80px, 18vh, 145px));
+        transform: translateY(145px);
       }
       50% {
-        transform: translateY(clamp(92px, 19.5vh, 157px));
+        transform: translateY(157px);
       }
     }
 
@@ -379,7 +374,7 @@
       left: 50%;
       bottom: -30px;
       width: 90%;
-      height: min(600px, 72vh);
+      height: 600px;
       border-radius: 8px;
       transform: translateX(-50%) translateY(14px) scale(0.9);
       opacity: 0;
@@ -669,7 +664,6 @@
       }
     }
 
-    /* ── MOBILE ── */
     @media (max-width: 768px) {
       body {
         overflow: hidden;
@@ -677,33 +671,23 @@
         background-position: center center;
       }
 
-      /* Scale the whole scene down to fit narrow screens with padding */
       .scene {
         width: 350px;
-        transform-origin: top center;
-        transform: scale(clamp(0.78, calc(100vw / 390px), 1))
-                   translateY(clamp(80px, 18vh, 145px));
-      }
-
-      .scene.open,
-      .scene.closing {
-        animation-play-state: paused;
+        transform: translateY(145px);
       }
 
       @keyframes envelope-float {
-        0%, 100% {
-          transform: scale(clamp(0.78, calc(100vw / 390px), 1))
-                     translateY(clamp(80px, 18vh, 145px));
+        0%,
+        100% {
+          transform: translateY(145px);
         }
         50% {
-          transform: scale(clamp(0.78, calc(100vw / 390px), 1))
-                     translateY(clamp(92px, 19.5vh, 157px));
+          transform: translateY(157px);
         }
       }
 
-      /* Keep envelope-wrap matching the scene width — was incorrectly 400px */
       .envelope-wrap {
-        width: 350px;
+        width: 400px;
         height: 230px;
         right: 6%;
         bottom: -45px;
@@ -715,10 +699,9 @@
         top: 75%;
       }
 
-      /* Lace card capped so it never overflows the viewport */
       .lace-card {
         width: 90%;
-        height: min(600px, 68dvh);
+        height: 600px;
         bottom: -30px;
       }
 
@@ -756,18 +739,6 @@
         bottom: 220px;
         font-size: 16px;
         letter-spacing: 3px;
-      }
-    }
-
-    /* Extra-small phones (< 360px) */
-    @media (max-width: 359px) {
-      .scene {
-        transform: scale(0.78) translateY(80px);
-      }
-
-      @keyframes envelope-float {
-        0%, 100% { transform: scale(0.78) translateY(80px); }
-        50%       { transform: scale(0.78) translateY(92px); }
       }
     }
 
@@ -814,7 +785,7 @@
             <div class="letter-inner">
               <div class="letter-eyebrow"></div>
               <div class="letter-eyebrow">بسم الله الرحمن الرحيم</div>
-              <div class="letter-verse">وَمِنْ ءَايَـٰتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَٰجًا لِّتَسْكُنُوٓا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِى ذَٰلِكَ لَـَٔايَـٰتٍ لِّقَوْمٍ يَتَفَكَّرُونَ</div>
+              <div class="letter-verse">وَمِنْ ءَايَـٰتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَٰجًا لِّتَسْكُنُوٓا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِى ذَٰلِكَ لَـَٔايَـٰتٍ لِّقَوْمٍ يَتَفَكَّرُونَ</div>
               <div class="letter-divider"></div>
               <div class="letter-body">Together with our families</div>
               <div class="letter-names">
