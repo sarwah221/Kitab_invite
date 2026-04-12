@@ -3,10 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="color-scheme" content="light only" />
+  <meta name="color-scheme" content="only light" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Lavishly+Yours&family=Amiri:wght@400;700&family=MonteCarlo&family=Great+Vibes&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      color-scheme: only light;
+    }
 
     html,
     body {
@@ -14,7 +18,7 @@
       padding: 0;
       width: 100%;
       min-height: 100%;
-      color-scheme: light;
+      color-scheme: only light;
     }
 
     body {
@@ -30,7 +34,24 @@
       overflow-x: hidden;
       overflow-y: auto;
       position: relative;
-      color-scheme: light;
+      color-scheme: only light;
+      background-color: #f7f2e8;
+    }
+
+    .envelope-wrap,
+    .envelope-body,
+    .flap-front,
+    .flap-back,
+    .fold-left,
+    .fold-right,
+    .fold-overlay-left,
+    .fold-overlay-right,
+    .fold-overlay-bottom,
+    .letter,
+    .lace-card-front,
+    .lace-card-back {
+      color-scheme: only light;
+      forced-color-adjust: none;
     }
 
     body.loading .scene,
@@ -778,7 +799,7 @@
     }
 
     .venue-details-title {
-      margin-top: 400px;
+      margin-top: 430px;
       margin-bottom: 0;
       font-family: 'Cormorant Garamond', serif;
       font-size: 14px;
@@ -824,7 +845,7 @@
 
     .venue-link {
       display: inline-block;
-      margin-top: 6px;
+      margin-top: 14px;
       padding: 8px 40px;
       border-radius: 800px;
       border: 1px solid rgba(255, 248, 247, 0.8);
@@ -893,7 +914,7 @@
       padding: 20px 18px 16px;
       background:
         url('https://www.transparenttextures.com/patterns/rice-paper-2.png'),
-        linear-gradient(170deg, #fff9f2, #f7eee4);
+        linear-gradient(160deg, #fffefb 0%, #faf8f4 100%);
       box-shadow: 0 22px 48px rgba(37, 16, 11, 0.35);
       color: #5e3834;
       position: relative;
@@ -901,7 +922,7 @@
 
     .rsvp-modal-title {
       font-family: 'Great Vibes', cursive;
-      font-size: 42px;
+      font-size: 34px;
       line-height: 1;
       font-weight: 400;
       text-align: center;
@@ -1066,12 +1087,20 @@
         padding: 7px 30px;
       }
 
+      .venue-details-title {
+        margin-top: 450px;
+      }
+
+      .venue-link {
+        margin-top: 16px;
+      }
+
       .rsvp-modal {
         padding: 18px 14px 14px;
       }
 
       .rsvp-modal-title {
-        font-size: 36px;
+        font-size: 24px;
       }
       
       
@@ -1159,7 +1188,7 @@
   <p class="venue-rsvp-frame-text">
     <span>kindly</span><br>
     <span class="venue-rsvp-label">RSVP</span><br>
-    <span>by 1/5/2026</span>
+    <span>by 26/4/2026</span>
   </p>
   <div class="venue-content">
     <h1 class="venue-message">We hope to see you there!</h1>
