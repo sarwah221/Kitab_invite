@@ -79,7 +79,7 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      z-index: 1;
+      z-index: 12;
       overflow: hidden;
     }
 
@@ -174,7 +174,7 @@
       clip-path: polygon(0 0, 100% 50%, 0 100%);
       background:
         url('https://www.transparenttextures.com/patterns/rice-paper-2.png'),
-        linear-gradient(170deg, #fffdf8 0%, #f7f2e8 100%);
+        linear-gradient(190deg, #fffdf8 0%, #f7f2e8 100%);
       background-repeat: repeat, no-repeat;
       background-size: auto, cover;
       background-blend-mode: multiply, normal;
@@ -185,7 +185,7 @@
       clip-path: polygon(100% 0, 0 50%, 100% 100%);
       background:
         url('https://www.transparenttextures.com/patterns/rice-paper-2.png'),
-        linear-gradient(190deg, #e5e3dd 0%, #f7f2e8 100%);
+        linear-gradient(190deg, #fffdf8 0%, #f7f2e8 100%);
       background-repeat: repeat, no-repeat;
       background-size: auto, cover;
       background-blend-mode: multiply, normal;
@@ -230,7 +230,7 @@
       clip-path: polygon(0 0, 100% 50%, 0 100%);
       background:
         url('https://www.transparenttextures.com/patterns/rice-paper-2.png'),
-        linear-gradient(170deg, #fffdf8 0%, #f7f2e8 100%);
+        linear-gradient(190deg, #fffdf8 0%, #f7f2e8 100%);
       background-repeat: repeat, no-repeat;
       background-size: auto, cover;
       background-blend-mode: multiply, normal;
@@ -448,7 +448,7 @@
     }
 
     .scene.open .lace-card-inner {
-      animation: lace-flip 5s cubic-bezier(0.25, 0.72, 0.2, 1) 2.4s forwards;
+      animation: lace-flip 5s cubic-bezier(0.25, 0.72, 0.2, 1) 1.5s forwards;
     }
 
     .scene.closing .lace-card {
@@ -708,7 +708,6 @@
       background: url('lace8.png') center center / cover no-repeat;
       z-index: 100;
       animation: splash-fade-out 5s ease-in-out forwards;
-      pointer-events: none;
     }
 
     @keyframes splash-fade-out {
@@ -894,7 +893,7 @@
 
 <script>
   const container = document.getElementById('particles');
-  for (let i = 0; i < 18; i++) {
+  for (let i = 0; i < 40; i++) {
     const p = document.createElement('div');
     p.className = 'particle';
     const size = Math.random() * 3 + 1;
@@ -912,18 +911,24 @@
   const scene = document.getElementById('scene');
   const OPEN_SETTLE_MS = 3000;
   const CLOSE_SETTLE_MS = 2200;
+  const SPLASH_DURATION_MS = 5000;
   let closeCleanupTimer;
   let transitionLock = false;
+  let splashDone = false;
 
   // Keep interactive content hidden until initial assets are loaded.
   window.addEventListener('load', () => {
     setTimeout(() => {
       document.body.classList.remove('loading');
     }, 120);
+    // Allow envelope clicks only after splash finishes fading
+    setTimeout(() => {
+      splashDone = true;
+    }, SPLASH_DURATION_MS);
   });
 
   function toggle() {
-    if (transitionLock) return;
+    if (transitionLock || !splashDone) return;
 
     if (scene.classList.contains('open')) {
       transitionLock = true;
