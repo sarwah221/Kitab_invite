@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="light only" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Lavishly+Yours&family=Amiri:wght@400;700&family=MonteCarlo&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Lavishly+Yours&family=Amiri:wght@400;700&family=MonteCarlo&family=Great+Vibes&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -630,6 +630,7 @@
       text-justify: inter-word;
       font-size: 12px;
       color: rgba(140,100,60,0.7);
+      word-spacing: 2px;
     }
 
     /*  OPEN STATE  */
@@ -732,13 +733,15 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      width: min(84vw, 540px);
+      width: min(48vw, 300px);
       transform: translate(-50%, -50%);
       height: auto;
       z-index: 1;
       pointer-events: none;
-      opacity: 0.95;
+      opacity: 0;
       filter: drop-shadow(0 8px 24px rgba(94, 52, 52, 0.28));
+      transition: opacity 1.2s ease, transform 1.2s ease;
+      transition-delay: 0.35s;
     }
 
     .venue-content {
@@ -784,14 +787,49 @@
       color: #e8dcda;
     }
 
+    .venue-rsvp-frame-text {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, calc(-50% + 14px));
+      z-index: 2;
+      width: min(42vw, 230px);
+      text-align: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      color: #fcfcfc;
+      letter-spacing: 0.03em;
+      line-height: 1.2;
+      pointer-events: none;
+      font-weight: 600;
+      opacity: 0;
+      transition: opacity 1.2s ease, transform 1.2s ease;
+      transition-delay: 0.35s;
+    }
+
+    .venue-rsvp-frame-text span {
+      display: inline-block;
+      margin: 2px 0;
+    }
+
+    .venue-rsvp-label {
+      font-family: 'MonteCarlo', cursive;
+      font-size: 40px;
+      font-weight: 600;
+      line-height: 0.9;
+      margin: 0 4px;
+      color: #ffefee;
+      vertical-align: middle;
+    }
+
     .venue-link {
       display: inline-block;
       margin-top: 6px;
-      padding: 8px 34px;
+      padding: 8px 40px;
       border-radius: 800px;
       border: 1px solid rgba(255, 248, 247, 0.8);
       background: rgba(117, 78, 74, 0.35);
-      color: #fff8f7; 
+      color: #fff8f7;
       font-family: 'Cormorant Garamond', serif;
       font-size: 14px;
       letter-spacing: 0.03em;
@@ -804,10 +842,162 @@
       transform: translateY(-1px);
     }
 
+    .venue-rsvp-open-btn {
+      position: absolute;
+      top: 54%;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      padding: 8px 40px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 248, 247, 0.85);
+      background: rgba(255, 248, 247, 0.22);
+      color: #fff8f7;
+      font-family: 'Playfair Display', serif;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.25s ease, transform 0.25s ease;
+    }
+
+    .venue-rsvp-open-btn:hover {
+      background: rgba(255, 248, 247, 0.38);
+      transform: translateX(-50%) translateY(-1px);
+    }
+
+    .rsvp-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(25, 14, 10, 0.45);
+      z-index: 120;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+
+    body.rsvp-open .rsvp-modal-backdrop {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .rsvp-modal {
+      width: min(92vw, 420px);
+      border-radius: 10px;
+      padding: 20px 18px 16px;
+      background:
+        url('https://www.transparenttextures.com/patterns/rice-paper-2.png'),
+        linear-gradient(170deg, #fff9f2, #f7eee4);
+      box-shadow: 0 22px 48px rgba(37, 16, 11, 0.35);
+      color: #5e3834;
+      position: relative;
+    }
+
+    .rsvp-modal-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 42px;
+      line-height: 1;
+      font-weight: 400;
+      text-align: center;
+      margin-bottom: 12px;
+      color: #754e4a;
+    }
+
+    .rsvp-close {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      border: 0;
+      background: transparent;
+      color: #8d6762;
+      font-size: 24px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .rsvp-field {
+      margin-bottom: 12px;
+    }
+
+    .rsvp-label {
+      display: block;
+      margin-bottom: 6px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      color: #6f4a46;
+    }
+
+    .rsvp-input {
+      width: 100%;
+      border: 1px solid rgba(117, 78, 74, 0.35);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      background: rgba(255, 255, 255, 0.8);
+      color: #51332f;
+    }
+
+    .rsvp-options {
+      display: flex;
+      gap: 14px;
+      margin-top: 8px;
+      margin-bottom: 8px;
+    }
+
+    .rsvp-option {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      color: #5f3d39;
+    }
+
+    .rsvp-submit {
+      width: 100%;
+      margin-top: 8px;
+      padding: 10px 14px;
+      border: 1px solid rgba(117, 78, 74, 0.5);
+      border-radius: 999px;
+      background: rgba(117, 78, 74, 0.14);
+      color: #754e4a;
+      font-family: 'Playfair Display', serif;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .rsvp-status {
+      min-height: 20px;
+      margin-top: 8px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px;
+      color: #754e4a;
+      text-align: center;
+    }
+
     body.show-venue .venue-fade-screen {
       opacity: 1;
       visibility: visible;
       pointer-events: auto;
+    }
+
+    body.show-venue-ready .venue-rsvp-frame {
+      opacity: 0.95;
+      transform: translate(-50%, -50%);
+    }
+
+    body.show-venue-ready .venue-rsvp-frame-text {
+      opacity: 1;
+      transform: translate(-50%, -50%);
     }
 
     @keyframes splash-fade-out {
@@ -858,7 +1048,30 @@
       }
 
       .venue-rsvp-frame {
-        width: min(94vw, 430px);
+        width: min(72vw, 250px);
+      }
+
+      .venue-rsvp-frame-text {
+        width: min(62vw, 190px);
+        font-size: 16px;
+      }
+
+      .venue-rsvp-label {
+        font-size: 30px;
+      }
+
+      .venue-rsvp-open-btn {
+        top: 56%;
+        font-size: 12px;
+        padding: 7px 30px;
+      }
+
+      .rsvp-modal {
+        padding: 18px 14px 14px;
+      }
+
+      .rsvp-modal-title {
+        font-size: 36px;
       }
       
       
@@ -943,10 +1156,38 @@
 
 <div class="venue-fade-screen" aria-hidden="true">
   <img class="venue-rsvp-frame" src="rsvp.png" alt="" aria-hidden="true">
+  <p class="venue-rsvp-frame-text">
+    <span>kindly</span><br>
+    <span class="venue-rsvp-label">RSVP</span><br>
+    <span>by 1/5/2026</span>
+  </p>
   <div class="venue-content">
     <h1 class="venue-message">We hope to see you there!</h1>
     <h2 class="venue-details-title">LOCATION DETAILS</h2>
     <a class="venue-link" href="https://maps.app.goo.gl/h2aC6AqRzVKQouWK7" target="_blank" rel="noopener noreferrer">Open location link</a>
+    <button class="venue-rsvp-open-btn" id="open-rsvp" type="button">RSVP</button>
+  </div>
+</div>
+
+<div class="rsvp-modal-backdrop" id="rsvp-backdrop" aria-hidden="true">
+  <div class="rsvp-modal" role="dialog" aria-modal="true" aria-labelledby="rsvp-title">
+    <button class="rsvp-close" id="close-rsvp" type="button" aria-label="Close RSVP form">&times;</button>
+    <h2 class="rsvp-modal-title" id="rsvp-title">RSVP</h2>
+    <form id="rsvp-form">
+      <div class="rsvp-field">
+        <label class="rsvp-label" for="rsvp-name">Name</label>
+        <input class="rsvp-input" id="rsvp-name" name="name" type="text" required autocomplete="name" />
+      </div>
+      <div class="rsvp-field">
+        <span class="rsvp-label">Are you attending?</span>
+        <div class="rsvp-options">
+          <label class="rsvp-option"><input type="radio" name="attending" value="yes" required /> Yes</label>
+          <label class="rsvp-option"><input type="radio" name="attending" value="no" required /> No</label>
+        </div>
+      </div>
+      <button class="rsvp-submit" type="submit">Send RSVP</button>
+      <p class="rsvp-status" id="rsvp-status" aria-live="polite"></p>
+    </form>
   </div>
 </div>
 
@@ -995,7 +1236,7 @@
                 Goda Rum, Kyrkogatan 45, Kumla
               </div>
               <div class="letter-divider" style="margin-top:5px;margin-bottom:5px;"></div>
-              <div class="letter-footer">We hope to see you there!</div>
+              <div class="letter-footer">بحضوركم يتم لنا الفرح و السرور</div>
             </div>
           </div>
         </div>
@@ -1033,11 +1274,49 @@
   const CLOSE_SETTLE_MS = 3000;
   const SPLASH_DURATION_MS = 7000;
   const AUTO_CLOSE_AFTER_SHOW_MS = 15000;
+  const RSVP_ENDPOINT = 'https://formspree.io/f/mgorwnjz';
+
+  const rsvpOpenButton = document.getElementById('open-rsvp');
+  const rsvpBackdrop = document.getElementById('rsvp-backdrop');
+  const rsvpCloseButton = document.getElementById('close-rsvp');
+  const rsvpForm = document.getElementById('rsvp-form');
+  const rsvpStatus = document.getElementById('rsvp-status');
+
   let closeCleanupTimer;
   let autoCloseTimer;
   let venueContentTimer;
   let transitionLock = false;
   let splashDone = false;
+
+  function openRsvpModal() {
+    document.body.classList.add('rsvp-open');
+    rsvpBackdrop.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeRsvpModal() {
+    document.body.classList.remove('rsvp-open');
+    rsvpBackdrop.setAttribute('aria-hidden', 'true');
+  }
+
+  async function submitRsvp(payload) {
+    if (!RSVP_ENDPOINT) {
+      const existing = JSON.parse(localStorage.getItem('rsvpResponses') || '[]');
+      existing.push(payload);
+      localStorage.setItem('rsvpResponses', JSON.stringify(existing));
+      return { ok: true, localOnly: true };
+    }
+
+    const response = await fetch(RSVP_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+
+    return { ok: response.ok, localOnly: false };
+  }
 
   function closeScene(showVenueAfterClose = false) {
     transitionLock = true;
@@ -1100,6 +1379,54 @@
       if (!scene.classList.contains('open')) return;
       closeScene(true);
     }, AUTO_CLOSE_AFTER_SHOW_MS);
+  });
+
+  rsvpOpenButton.addEventListener('click', openRsvpModal);
+  rsvpCloseButton.addEventListener('click', closeRsvpModal);
+
+  rsvpBackdrop.addEventListener('click', (event) => {
+    if (event.target === rsvpBackdrop) {
+      closeRsvpModal();
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeRsvpModal();
+    }
+  });
+
+  rsvpForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(rsvpForm);
+    const payload = {
+      name: String(formData.get('name') || '').trim(),
+      attending: formData.get('attending'),
+      submittedAt: new Date().toISOString()
+    };
+
+    if (!payload.name || !payload.attending) {
+      rsvpStatus.textContent = 'Please fill in your name and attendance.';
+      return;
+    }
+
+    rsvpStatus.textContent = 'Sending...';
+
+    try {
+      const result = await submitRsvp(payload);
+      if (!result.ok) {
+        throw new Error('Submit failed');
+      }
+
+      rsvpStatus.textContent = result.localOnly
+        ? 'Saved on this device. Add RSVP_ENDPOINT in script to collect online.'
+        : 'Thank you. Your RSVP has been received.';
+
+      rsvpForm.reset();
+    } catch (error) {
+      rsvpStatus.textContent = 'Could not send RSVP. Please try again.';
+    }
   });
 </script>
 </body>
