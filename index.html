@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="color-scheme" content="only light" />
+  <meta name="color-scheme" content="light" />
+  <meta name="supported-color-schemes" content="light" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Lavishly+Yours&family=Amiri:wght@400;700&family=MonteCarlo&family=Great+Vibes&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      color-scheme: only light;
+      color-scheme: light !important;
     }
 
     html,
@@ -18,7 +19,7 @@
       padding: 0;
       width: 100%;
       min-height: 100%;
-      color-scheme: only light;
+      color-scheme: light !important;
     }
 
     body {
@@ -34,7 +35,7 @@
       overflow-x: hidden;
       overflow-y: auto;
       position: relative;
-      color-scheme: only light;
+      color-scheme: light !important;
       background-color: #f7f2e8;
     }
 
@@ -50,8 +51,29 @@
     .letter,
     .lace-card-front,
     .lace-card-back {
-      color-scheme: only light;
+      color-scheme: light !important;
       forced-color-adjust: none;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      html,
+      body {
+        color-scheme: light !important;
+        background-color: #f7f2e8 !important;
+      }
+
+      .envelope-body,
+      .flap-front,
+      .flap-back,
+      .fold-left,
+      .fold-right,
+      .fold-overlay-left,
+      .fold-overlay-right,
+      .fold-overlay-bottom,
+      .letter,
+      .rsvp-modal {
+        color-scheme: light !important;
+      }
     }
 
     body.loading .scene,
