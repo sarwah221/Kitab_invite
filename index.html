@@ -724,7 +724,21 @@
       visibility: hidden;
       pointer-events: none;
       z-index: 95;
+      overflow: hidden;
       transition: opacity 3s ease, visibility 3s ease;
+    }
+
+    .venue-rsvp-frame {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: min(84vw, 540px);
+      transform: translate(-50%, -50%);
+      height: auto;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.95;
+      filter: drop-shadow(0 8px 24px rgba(94, 52, 52, 0.28));
     }
 
     .venue-content {
@@ -741,6 +755,7 @@
       text-align: center;
       opacity: 0;
       transform: translateY(14px);
+      z-index: 2;
       transition: opacity 1.2s ease, transform 1.2s ease;
       transition-delay: 0.35s;
     }
@@ -841,6 +856,10 @@
         font-size: 18px;
         letter-spacing: 2px;
       }
+
+      .venue-rsvp-frame {
+        width: min(94vw, 430px);
+      }
       
       
       .fold-overlay-bottom {
@@ -919,10 +938,11 @@
 <body class="loading">
 
 <div class="splash-screen" style="position:fixed;inset:0;background:#f6efe4 url('lace8.png') center center / cover no-repeat;z-index:100;pointer-events:none;">
-  <h1 style="position:absolute;bottom:40px;left:20px;text-align:left;font-family:'Playfair Display', serif;font-size:10px;color:#bdb4b3;">Coded by Sarah</h1>
+  <h1 style="position:absolute;bottom:40px;left:20px;text-align:left;font-family:'Playfair Display', serif;font-size:10px;color:#bdb4b3;"></h1>
 </div>
 
 <div class="venue-fade-screen" aria-hidden="true">
+  <img class="venue-rsvp-frame" src="rsvp.png" alt="" aria-hidden="true">
   <div class="venue-content">
     <h1 class="venue-message">We hope to see you there!</h1>
     <h2 class="venue-details-title">LOCATION DETAILS</h2>
