@@ -713,7 +713,7 @@
       height: 100%;
       background: url('lace8.png') center center / cover no-repeat;
       z-index: 100;
-      animation: splash-fade-out 1s ease-in-out forwards;
+      animation: splash-fade-out 7s ease-in-out forwards;
     }
 
     .venue-fade-screen {
@@ -1004,8 +1004,8 @@
   const laceCard = document.querySelector('.lace-card');
   const OPEN_SETTLE_MS = 3000;
   const CLOSE_SETTLE_MS = 3000;
-  const SPLASH_DURATION_MS = 5000;
-  const AUTO_CLOSE_AFTER_SHOW_MS = 1500;
+  const SPLASH_DURATION_MS = 7000;
+  const AUTO_CLOSE_AFTER_SHOW_MS = 15000;
   let closeCleanupTimer;
   let autoCloseTimer;
   let transitionLock = false;
