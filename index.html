@@ -719,9 +719,7 @@
     .venue-fade-screen {
       position: fixed;
       inset: 0;
-      background:
-        linear-gradient(rgba(171, 146, 143, 0.6), rgba(171, 146, 143, 0.6)),
-        url('venue.png') center center / cover no-repeat;
+      background: url('venue.png') center center / cover no-repeat;
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
@@ -764,7 +762,7 @@
     .venue-details-title {
       margin-top: 400px;
       margin-bottom: 0;
-      font-family: 'Playfair Display', serif;
+      font-family: 'Cormorant Garamond', serif;
       font-size: 14px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -1056,7 +1054,6 @@
     if (transitionLock || !splashDone) return;
 
     if (scene.classList.contains('open')) {
-      closeScene(false);
       return;
     }
 
