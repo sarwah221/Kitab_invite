@@ -13,7 +13,7 @@
     }
 
     body {
-      width: 100vw;
+      width: 100%;
       max-width: 100%;
       min-height: 100vh;
       display: flex;
@@ -22,7 +22,8 @@
       background: url('img1.png') center center / cover no-repeat fixed;
       background-position: center 10%;
       font-family: 'Cormorant Garamond', serif;
-      overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: auto;
       position: relative;
       color-scheme: light;
     }
@@ -713,6 +714,8 @@
       body {
         width: 100%;
         min-height: 100vh;
+        overflow-x: hidden;
+        overflow-y: auto;
         background-attachment: scroll;
         background-position: center -35%;
       }
