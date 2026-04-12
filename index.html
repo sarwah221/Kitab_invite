@@ -726,7 +726,7 @@
       visibility: hidden;
       pointer-events: none;
       z-index: 95;
-      transition: opacity 2s ease, visibility 2s ease;
+      transition: opacity 3s ease, visibility 3s ease;
     }
 
     .venue-content {
@@ -741,6 +741,15 @@
       gap: 12px;
       padding-top: 48px;
       text-align: center;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 1.2s ease, transform 1.2s ease;
+      transition-delay: 0.35s;
+    }
+
+    body.show-venue-ready .venue-content {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .venue-message {
@@ -1008,6 +1017,7 @@
   const AUTO_CLOSE_AFTER_SHOW_MS = 15000;
   let closeCleanupTimer;
   let autoCloseTimer;
+  let venueContentTimer;
   let transitionLock = false;
   let splashDone = false;
 
@@ -1023,6 +1033,10 @@
       transitionLock = false;
       if (showVenueAfterClose) {
         document.body.classList.add('show-venue');
+        clearTimeout(venueContentTimer);
+        venueContentTimer = setTimeout(() => {
+          document.body.classList.add('show-venue-ready');
+        }, 3000);
       }
     }, CLOSE_SETTLE_MS);
   }
@@ -1049,7 +1063,9 @@
     transitionLock = true;
     clearTimeout(closeCleanupTimer);
     clearTimeout(autoCloseTimer);
+    clearTimeout(venueContentTimer);
     document.body.classList.remove('show-venue');
+    document.body.classList.remove('show-venue-ready');
     scene.classList.remove('closing');
     scene.classList.add('open');
 
