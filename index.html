@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="light only" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Lavishly+Yours&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Lavishly+Yours&family=Amiri:wght@400;700&family=MonteCarlo&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -713,7 +713,79 @@
       height: 100%;
       background: url('lace8.png') center center / cover no-repeat;
       z-index: 100;
-      animation: splash-fade-out 7s ease-in-out forwards;
+      animation: splash-fade-out 1s ease-in-out forwards;
+    }
+
+    .venue-fade-screen {
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(rgba(171, 146, 143, 0.6), rgba(171, 146, 143, 0.6)),
+        url('venue.jpg') center center / cover no-repeat;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      z-index: 95;
+      transition: opacity 2s ease, visibility 2s ease;
+    }
+
+    .venue-content {
+      position: relative;
+      width: min(92vw, 760px);
+      margin: 0 auto;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 12px;
+      padding-top: 48px;
+      text-align: center;
+    }
+
+    .venue-message {
+      margin: 70px 0 0;
+      font-family: 'MonteCarlo', cursive;
+      font-size: 40px;
+      line-height: 1.1;
+      color: #754e4a;
+      font-weight: 400;
+    }
+
+    .venue-details-title {
+      margin-top: 400px;
+      margin-bottom: 0;
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #e8dcda;
+    }
+
+    .venue-link {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 248, 247, 0.8);
+      background: rgba(117, 78, 74, 0.35);
+      color: #fff8f7; 
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      letter-spacing: 0.03em;
+      text-decoration: none;
+      transition: background 0.25s ease, transform 0.25s ease;
+    }
+
+    .venue-link:hover {
+      background: rgba(117, 78, 74, 0.55);
+      transform: translateY(-1px);
+    }
+
+    body.show-venue .venue-fade-screen {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
     }
 
     @keyframes splash-fade-out {
@@ -840,7 +912,15 @@
 <body class="loading">
 
 <div class="splash-screen" style="position:fixed;inset:0;background:#f6efe4 url('lace8.png') center center / cover no-repeat;z-index:100;pointer-events:none;">
-  <h1 style="position:absolute;bottom:20px;left:20px;text-align:left;font-family:'Playfair Display', serif;font-size:10px;color:#bdb4b3;">Coded by Sarah</h1>
+  <h1 style="position:absolute;bottom:40px;left:20px;text-align:left;font-family:'Playfair Display', serif;font-size:10px;color:#bdb4b3;">Coded by Sarah</h1>
+</div>
+
+<div class="venue-fade-screen" aria-hidden="true">
+  <div class="venue-content">
+    <h1 class="venue-message">We hope to see you there!</h1>
+    <h2 class="venue-details-title">LOCATION DETAILS</h2>
+    <a class="venue-link" href="https://maps.app.goo.gl/h2aC6AqRzVKQouWK7" target="_blank" rel="noopener noreferrer">Open location link</a>
+  </div>
 </div>
 
 <div class="monogram" aria-hidden="true"><span>S</span><span class="letter-ampersand-top" aria-hidden="true"></span><span>Z</span></div>
@@ -921,12 +1001,31 @@
   }
 
   const scene = document.getElementById('scene');
+  const laceCard = document.querySelector('.lace-card');
   const OPEN_SETTLE_MS = 3000;
-  const CLOSE_SETTLE_MS = 2200;
+  const CLOSE_SETTLE_MS = 3000;
   const SPLASH_DURATION_MS = 5000;
+  const AUTO_CLOSE_AFTER_SHOW_MS = 1500;
   let closeCleanupTimer;
+  let autoCloseTimer;
   let transitionLock = false;
   let splashDone = false;
+
+  function closeScene(showVenueAfterClose = false) {
+    transitionLock = true;
+    clearTimeout(autoCloseTimer);
+    scene.classList.add('closing');
+    scene.classList.remove('open');
+
+    clearTimeout(closeCleanupTimer);
+    closeCleanupTimer = setTimeout(() => {
+      scene.classList.remove('closing');
+      transitionLock = false;
+      if (showVenueAfterClose) {
+        document.body.classList.add('show-venue');
+      }
+    }, CLOSE_SETTLE_MS);
+  }
 
   // Keep interactive content hidden until initial assets are loaded.
   window.addEventListener('load', () => {
@@ -943,20 +1042,14 @@
     if (transitionLock || !splashDone) return;
 
     if (scene.classList.contains('open')) {
-      transitionLock = true;
-      scene.classList.add('closing');
-      scene.classList.remove('open');
-
-      clearTimeout(closeCleanupTimer);
-      closeCleanupTimer = setTimeout(() => {
-        scene.classList.remove('closing');
-        transitionLock = false;
-      }, CLOSE_SETTLE_MS);
+      closeScene(false);
       return;
     }
 
     transitionLock = true;
     clearTimeout(closeCleanupTimer);
+    clearTimeout(autoCloseTimer);
+    document.body.classList.remove('show-venue');
     scene.classList.remove('closing');
     scene.classList.add('open');
 
@@ -964,6 +1057,17 @@
       transitionLock = false;
     }, OPEN_SETTLE_MS);
   }
+
+  laceCard.addEventListener('animationend', (event) => {
+    if (event.animationName !== 'lace-rise') return;
+    if (!scene.classList.contains('open')) return;
+
+    clearTimeout(autoCloseTimer);
+    autoCloseTimer = setTimeout(() => {
+      if (!scene.classList.contains('open')) return;
+      closeScene(true);
+    }, AUTO_CLOSE_AFTER_SHOW_MS);
+  });
 </script>
 </body>
 </html>
