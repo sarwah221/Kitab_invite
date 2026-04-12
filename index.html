@@ -8,7 +8,12 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html {
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100%;
       color-scheme: light;
     }
 
@@ -20,7 +25,7 @@
       align-items: center;
       justify-content: center;
       background: url('img1.png') center center / cover no-repeat fixed;
-      background-position: center 10%;
+      background-position: center center;
       font-family: 'Cormorant Garamond', serif;
       overflow-x: hidden;
       overflow-y: auto;
@@ -85,8 +90,9 @@
 
     .particle {
       position: absolute;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(212,175,55,0.8), rgba(212,175,55,0));
+      color: rgba(212, 175, 55, 0.8);
+      line-height: 1;
+      text-shadow: 0 0 8px rgba(212, 175, 55, 0.35);
       animation: drift linear infinite;
     }
 
@@ -903,10 +909,10 @@
   for (let i = 0; i < 40; i++) {
     const p = document.createElement('div');
     p.className = 'particle';
-    const size = Math.random() * 3 + 1;
+    p.textContent = '✦';
+    const size = Math.random() * 2 + 4;
     p.style.cssText = `
-      width: ${size}px;
-      height: ${size}px;
+      font-size: ${size}px;
       left: ${Math.random() * 100}%;
       animation-duration: ${Math.random() * 14 + 10}s;
       animation-delay: ${Math.random() * -20}s;
